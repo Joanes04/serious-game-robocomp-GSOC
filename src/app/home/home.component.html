@@ -1,10 +1,69 @@
 <div class="container-fluid">
   <div class="jumbotron text-center">
-    <h1>
-      <img class="logo" src="assets/ngx-rocket-logo.png" alt="angular logo" />
-      <span translate>Hello world !</span>
-    </h1>
-    <app-loader [isLoading]="isLoading"></app-loader>
-    <q [hidden]="isLoading">{{ quote }}</q>
+    <div class="container">
+      <div class="card col-md-6 mt-3 mx-auto">
+        <div class="card-body">
+          <h1>Serious Game</h1>
+          <form [formGroup]="playerForm" novalidate>
+            <div class="form-group">
+              <label class="d-block">
+                <select
+                  class="form-control"
+                  (change)="selectPlayer()"
+                  formControlName="player"
+                >
+                  <option disabled selected [value]="null"
+                    >Seleccione un jugador</option
+                  >
+                  <option value="1">Jugador 1</option>
+                  <option value="2">Jugador 2</option>
+                  <option value="3">Jugador 3</option>
+                </select>
+              </label>
+            </div>
+            <div class="form-group" *ngIf="playerForm.controls['player'].valid">
+              <label class="d-block">
+                <select
+                  class="form-control"
+                  (change)="addGame()"
+                  formControlName="game"
+                >
+                  <option disabled selected [value]="null"
+                    >Añadir un juego</option
+                  >
+                  <option value="Juego 1">Juego 1</option>
+                  <option value="Juego 2">Juego 2</option>
+                  <option value="Juego 3">Juego 3</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="form-group">
+              <ul class="list-group">
+                <li *ngFor="let game of gamesArray" class="list-group-item">
+                  {{ game }}
+                  <i
+                    class="fas fa-trash-alt"
+                    style="float: right; color: red"
+                    (click)="removeGame(game)"
+                  ></i>
+                </li>
+              </ul>
+            </div>
+            <button
+              class="btn btn-primary w-100"
+              type="submit"
+              *ngIf="
+                playerForm.controls['player'].valid && gamesArray.length !== 0
+              "
+              (click)="selectPlayer()"
+            >
+              <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
+              <span translate>Empezar sesión</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
