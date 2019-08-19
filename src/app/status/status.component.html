@@ -1,1 +1,149 @@
-<p>status works!</p>
+<div class="container-fluid">
+  <div class="jumbotron text-center">
+    <div class="container">
+      <div class="card col-md-12 mt-6 mx-auto">
+        <div class="card-body">
+          <h3>
+            Jugador: <span style="font-weight: bold;">{{ player }}</span>
+          </h3>
+          <br />
+          <button
+            class="btn btn-primary w-100"
+            (click)="startGame()"
+            [disabled]="statusGame !== 'stopped'"
+          >
+            <span>Empezar juego</span>
+          </button>
+          <div class="row" style="margin-top: 30px;">
+            <div class="col-sm">
+              <button
+                class="btn btn-info w-100"
+                (click)="pauseGame()"
+                [disabled]="statusGame !== 'running'"
+              >
+                <span>Pausar</span>
+              </button>
+            </div>
+            <div class="col-sm">
+              <button
+                class="btn btn-success w-100"
+                (click)="continueGame()"
+                [disabled]="statusGame !== 'paused'"
+              >
+                <span>Continuar</span>
+              </button>
+            </div>
+            <div class="col-sm">
+              <button
+                class="btn btn-warning w-100"
+                (click)="resetGame()"
+                [disabled]="statusGame !== 'paused'"
+              >
+                <span>Reiniciar</span>
+              </button>
+            </div>
+            <div class="col-sm">
+              <button
+                class="btn btn-danger w-100"
+                (click)="stopGame()"
+                [disabled]="statusGame !== 'paused'"
+              >
+                <span>Finalizar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <h2>Información del juego</h2>
+          <div class="row info-row">
+            <div class="col-sm">
+              Fecha de inicio:
+            </div>
+            <div class="col-sm">
+              {{ info.date | date: 'short' }}
+            </div>
+          </div>
+          <div class="row info-row">
+            <div class="col-sm">
+              Tiempo jugado:
+            </div>
+            <div class="col-sm">{{ info.duration }} s</div>
+          </div>
+          <div class="row info-row">
+            <div class="col-sm">
+              Estado:
+            </div>
+            <div class="col-sm">
+              {{ info.status }}
+            </div>
+          </div>
+          <div class="row info-row">
+            <div class="col-sm">
+              Nº pantalla pulsada:
+            </div>
+            <div class="col-sm">
+              {{ info.pantalla_pulsada }}
+            </div>
+          </div>
+          <div class="row info-row">
+            <div class="col-sm">
+              Nº mano cerrada:
+            </div>
+            <div class="col-sm">
+              {{ info.mano_cerrada }}
+            </div>
+          </div>
+          <div class="row info-row">
+            <div class="col-sm">
+              Distancia recorrida:
+            </div>
+            <div class="col-sm">{{ info.distance }} mm</div>
+          </div>
+          <div class="row info-row">
+            <div class="col-sm">
+              Nº de ayudas:
+            </div>
+            <div class="col-sm">
+              {{ info.help }}
+            </div>
+          </div>
+          <div class="row info-row">
+            <div class="col-sm">
+              Nº comprobaciones:
+            </div>
+            <div class="col-sm">
+              {{ info.check }}
+            </div>
+          </div>
+          <div class="row info-row">
+            <div class="col-sm">
+              Aciertos
+            </div>
+            <div class="col-sm">
+              {{ info.successes }}
+            </div>
+          </div>
+          <div class="row info-row">
+            <div class="col-sm">
+              Fallos
+            </div>
+            <div class="col-sm">
+              {{ info.failures }}
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <button
+            class="btn btn-primary w-100"
+            (click)="startGame()"
+            [disabled]="statusGame !== 'stopped'"
+          >
+            <span>Finalizar sesión</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
