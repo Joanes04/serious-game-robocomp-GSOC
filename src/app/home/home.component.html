@@ -56,7 +56,7 @@
               *ngIf="
                 playerForm.controls['player'].valid && gamesArray.length !== 0
               "
-              (click)="selectPlayer()"
+              (click)="startSesion()"
             >
               <i class="fas fa-cog fa-spin" [hidden]="!isLoading"></i>
               <span translate>Empezar sesión</span>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from '@env/environment';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,11 @@ export class HomeComponent implements OnInit {
   playerForm!: FormGroup;
   gamesArray: any = [];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.createForm();
   }
 
@@ -42,6 +47,15 @@ export class HomeComponent implements OnInit {
     if (index !== -1) {
       this.gamesArray.splice(index, 1);
     }
+  }
+
+  startSesion() {
+    this.router.navigate(
+      [this.route.snapshot.queryParams.redirect || '/status'],
+      {
+        replaceUrl: true
+      }
+    );
   }
 
   private createForm() {
